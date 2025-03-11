@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Medicine } from '../classes/Medecine';
-import dotenv from 'dotenv';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
-dotenv.config();
-
-const geminiApiKey: string = process.env.GEMINI_API_KEY as string;
+const geminiApiKey: string = import.meta.env.VITE_GEMINI_API_KEY as string;
 const genAI = new GoogleGenerativeAI(geminiApiKey);
 
 const model = genAI.getGenerativeModel({
@@ -20,9 +17,9 @@ const generationConfig = {
   responseMimeType: 'text/plain',
 };
 
-const medicineDescription = (medicine: Medicine) => {
+const medicineDescription = ({ medicine }: { medicine: Medicine }) => {
   const [description, setDescription] = useState<string>(medicine.description || '');
-
+  const [isSelected, setIsSelected] = useState<Boolean>(true);
   useEffect(() => {
     if (medicine.description == null) {
       const generateDescription = async () => {
@@ -35,10 +32,18 @@ const medicineDescription = (medicine: Medicine) => {
           const drugDescription = result.response.text();
           const shortDescription = drugDescription.split(' ').slice(0, 100).join(' ') + (drugDescription.split(' ').length > 100 ? '...' : '');
           setDescription(shortDescription);
+          await fetch(`http://localhost:3000/api/medicines/${medicine._id}`, {
+            method: 'PATCH',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ description: shortDescription }),
+          });
         } catch (error) {
           console.error('Error generating description with Gemini API:', error);
           setDescription('Error generating description');
         }
+        
       };
 
       generateDescription();
@@ -47,8 +52,8 @@ const medicineDescription = (medicine: Medicine) => {
 
   return (
     <div>
-      <h1>{medicine.medicineName}</h1>
-      <p>{medicine.description}</p>
+      <p>{description}</p>
+      <button onClick={() => {setIsSelected(!isSelected)}}>{isSelected? 'Remove':'Add to prescriptions'}</button>
     </div>
   );
 };

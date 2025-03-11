@@ -4,12 +4,19 @@ import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import './listemeds.css'
 import { Medicine } from '../classes/Medecine.js';
+import MedicineDescription from './medicineDescription';
+import SearchBar from './searchbar.js';
 
 
 function BasicExample() {
   const location = useLocation();
   const {user}: {user: User} = location.state || {};
   const [medications, setMedications] = useState<Medicine[]>([]);
+  const [searchCompleted, setSearchCompleted] = useState(false);
+
+  const handleSearchComplete = () => {
+      setSearchCompleted(!searchCompleted); // Toggle state to force re-render
+  };
   
   useEffect(() => {
     const fetchMedications = async () => {
@@ -38,13 +45,14 @@ function BasicExample() {
   
     return (
       <>
+      <SearchBar onSearchComplete={handleSearchComplete}></SearchBar>
         <h1 className='title'>Bonjour, {user.name}</h1>
         <Accordion defaultActiveKey="0">
           {medications.map((med, index) => ( // changer liste par celle qui aura été  générée par Félix.
             <Accordion.Item eventKey={String(index)} key={index}>
               <Accordion.Header>{med.medicineName}</Accordion.Header>
               <Accordion.Body>
-                {med.description}
+                <MedicineDescription medicine={med}></MedicineDescription>
               </Accordion.Body>
             </Accordion.Item>
           ))}
