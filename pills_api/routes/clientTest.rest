@@ -1,0 +1,54 @@
+POST http://localhost:3000/api/clients
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "phoneNumber": "+5148166816",
+  "emailAddress": "a@gmail.com",
+  "password": "SecurePass123",
+  "prescriptionList": [
+    "65eacc5f5c3b3a001f5e7d89",
+    "65eacc5f5c3b3a001f5e7d8a"
+  ],
+  "flags": "skipped",
+  "interactions": "none",
+  "doctor": "65eacc5f5c3b3a001f5e7d8b"
+}
+
+###
+GET http://localhost:3000/api/clients
+
+###
+
+GET http://localhost:3000/api/clients/67ccb0e452c9cd2e115a3b55
+
+
+###
+PATCH http://localhost:3000/api/clients/67ccc650528f95322255255d
+Content-Type: application/json
+
+{
+  "prescriptionList": ["67ccd040d00250c14818456f"]
+}
+
+###
+
+DELETE http://localhost:3000/api/clients/67ccc626528f95322255255b
+
+###
+POST http://localhost:3000/api/medicines
+Content-Type: application/json
+
+{
+    "medicineName": "Aspirin",
+    "description": "Used to reduce pain, fever, or inflammation.",
+    "startDate": "2025-03-01T00:00:00.000Z",
+    "endDate": "2025-03-10T00:00:00.000Z",
+    "frequency": "Once a day",
+    "timeOfTheDay": "Morning",
+    "disclaimer": "Do not take on an empty stomach."
+}
+
+###
+
+GET http://localhost:3000/api/medicines

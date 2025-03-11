@@ -1,0 +1,43 @@
+{
+    "name": "John Doe",
+    "phoneNumber": "+5148166816",
+    "emailAddress": "a@gmail.com",
+    "password": "1234",
+    "prescriptionList": [
+      {
+        "medicineName": "Aspirin",
+        "description": "Used to reduce pain.",
+        "startDate": "2025-03-01T00:00:00.000Z",
+        "endDate": "2025-03-10T00:00:00.000Z",
+        "frequency": "Once a day",
+        "timeOfTheDay": "Morning",
+        "disclaimer": "Do not take on an empty stomach."
+      },
+      {
+        "medicineName": "Adville",
+        "description": "Used to reduce fever, or sadness.",
+        "startDate": "2025-03-01T00:00:00.000Z",
+        "endDate": "2025-03-10T00:00:00.000Z",
+        "frequency": "Once a day",
+        "timeOfTheDay": "Morning",
+        "disclaimer": "Do not take on an empty stomach."
+      },
+      {
+        "medicineName": "Tylénol",
+        "description": "mal tête",
+        "startDate": "2025-03-01T00:00:00.000Z",
+        "endDate": "2025-03-10T00:00:00.000Z",
+        "frequency": "Once a day",
+        "timeOfTheDay": "Night",
+        "disclaimer": "Do not take on a full stomach."
+      }
+    ],
+    "flags": "skipped",
+    "interactions": "none",
+    "doctor": {
+        "name": "Bernard Fougasse",
+        "phoneNumber": "5145551234",
+        "password": "1234",
+        "email": "doc@gmail.com"
+    }
+  }

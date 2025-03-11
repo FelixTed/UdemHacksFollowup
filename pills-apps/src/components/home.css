@@ -1,0 +1,11 @@
+  .login-page {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+
+    }
+  
+  .read-the-docs {
+    color: #888;
+  }
+  
